@@ -1,0 +1,31 @@
+Code:
+module PRAC(counter,clk,rst);
+input rst,clk;
+output reg [3:0] counter;
+reg [25:0]temp;
+reg clk_div;
+always@(posedge clk or negedge rst)//asynchronous
+begin
+if(!rst)
+begin
+temp<=0;
+clk_div<='d0;
+end
+else
+begin
+temp<=temp+26'd1;
+clk_div<=temp[20];
+end
+end
+always @(posedge clk_div or negedge rst)
+begin
+if(!rst)
+begin
+counter<=4'b1000;
+end
+else
+begin
+counter<=counter+4'b0001;
+end
+end
+endmodule
